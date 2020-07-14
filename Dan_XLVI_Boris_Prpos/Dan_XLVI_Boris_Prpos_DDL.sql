@@ -88,4 +88,3 @@ Insert into tblEmployes values ('Boris','Prpos','1996-10-25','2510996160001','22
 
 Insert into tblManagers values (1,1,1),(2,2,2),(3,3,1)
 
-Insert into tblReports values (5,'Ana','Anic','2020-07-02','Project1','Position1',8),(6,'Milos','Kos','2020-07-01','Project2','Position2',8),(3,'Maja','Majic','2020-07-02','Project3','Position3',8)
