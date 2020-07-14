@@ -14,7 +14,7 @@ namespace WpfApp1.ViewModel
     class MainWindowViewModel : ViewModelBase
     {
         MainWindow main;
-        Entity context = new Entity();
+        Entity2 context = new Entity2();
 
         public MainWindowViewModel(MainWindow mainOpen)
         {

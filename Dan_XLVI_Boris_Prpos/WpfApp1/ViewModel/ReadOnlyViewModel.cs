@@ -13,7 +13,7 @@ namespace WpfApp1.ViewModel
     class ReadOnlyViewModel : ViewModelBase
     {
         ReadOnly ro = new ReadOnly();
-        Entity context = new Entity();
+        Entity2 context = new Entity2();
 
         public ReadOnlyViewModel(ReadOnly roOpen)
         {

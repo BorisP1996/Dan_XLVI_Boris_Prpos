@@ -15,7 +15,7 @@ namespace Zadatak_1.ViewModel
     class ModifyManagerViewModel : ViewModelBase
     {
         ModifyMenager modifyMenagerWindow;
-        Entity context = new Entity();
+        Entity2 context = new Entity2();
         CreateManagerViewModel cmvm = new CreateManagerViewModel();
 
         public ModifyManagerViewModel(ModifyMenager mmOpen)
@@ -83,7 +83,7 @@ namespace Zadatak_1.ViewModel
 
                 if (KeyCheck(newEmploye.JMBG) == true && PasswordCheck(newEmploye.Pasword)==true && UsernameCheck(newEmploye.Username)==true && NumbersOnly(newEmploye.JMBG)==true)
                 {
-                    newEmploye.DateOfBirth = DateTime.ParseExact(cmvm.CalculateBirth(Employe.JMBG), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                    newEmploye.DateOfBirth = cmvm.CalculateBirth(Employe.JMBG);
 
                     context.tblEmployes.Add(newEmploye);
                     context.SaveChanges();
@@ -144,7 +144,7 @@ namespace Zadatak_1.ViewModel
         {
             try
             {
-                using (Entity context = new Entity())
+                using (Entity2 context = new Entity2())
                 {
                     tblEmploye employeToDelete = (from x in context.tblEmployes where x.EmployeID == Employe.EmployeID select x).First();
 
