@@ -283,7 +283,7 @@ namespace Zadatak_1.ViewModel
                 }
             }
             //first and thirs number must be correct
-            if (Convert.ToInt32(array[0].ToString()) < 4 && Convert.ToInt32(array[3].ToString()) <3 && Convert.ToInt32(array[2].ToString())<2 &&( Convert.ToInt32(array[4].ToString())==0 || Convert.ToInt32(array[4].ToString()) == 9))
+            if (Convert.ToInt32(array[0].ToString()) < 4 && Convert.ToInt32(array[2].ToString())<2 &&( Convert.ToInt32(array[4].ToString())==0 || Convert.ToInt32(array[4].ToString()) == 9))
             {
                 return true;
             }
