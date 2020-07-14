@@ -67,12 +67,16 @@
     <Compile Include="ViewModel\CreateManagerViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ModifyMenagerViewModel.cs" />
+    <Compile Include="ViewModel\ReadOnlyViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CreateManager.xaml.cs">
       <DependentUpon>CreateManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModifyMenager.xaml.cs">
       <DependentUpon>ModifyMenager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReadOnly.xaml.cs">
+      <DependentUpon>ReadOnly.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ModifyMenager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReadOnly.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

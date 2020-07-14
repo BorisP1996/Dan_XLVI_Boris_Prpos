@@ -118,6 +118,8 @@ namespace WpfApp1.ViewModel
                             //readonly menager
                             if (manager.LevelID == 2)
                             {
+                                //ReadOnly ro = new ReadOnly();
+                                //ro.ShowDialog();
                                 MessageBox.Show("ReadOnly manager");
                             }
                         }

@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfApp1.View.ReadOnly"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.View"
+        mc:Ignorable="d"
+        Title="ReadOnly" Height="450" Width="800">
+    <Grid>
+        <DataGrid Name="DataGridUsers"
+                  ItemsSource="{Binding ListEmploye, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Employe, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="45,35,212,135">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Surname"
+                                    Binding="{Binding Surname}" />
+                <DataGridTextColumn Header="JMBG"
+                                    Binding="{Binding JMBG}" />
+                <DataGridTextColumn Header="Account"
+                                    Binding="{Binding Account}" />
+                <DataGridTextColumn Header="E-mail"
+                                    Binding="{Binding Email}" />
+                <DataGridTextColumn  Header="Position"
+                                     Binding="{Binding Position}" />
+                <DataGridTextColumn  Header="Username"
+                                     Binding="{Binding Username}" />
+                <DataGridTextColumn  Header="Password"
+                                     Binding="{Binding Pasword}" />
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Close"
+                HorizontalAlignment="Left"
+                Margin="280,335,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>

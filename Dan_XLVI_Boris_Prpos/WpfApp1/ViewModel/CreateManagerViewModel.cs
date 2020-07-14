@@ -131,14 +131,15 @@ namespace WpfApp1.ViewModel
                 newEmploye.Email = Employe.Email;
                 string birthdate = CalculateBirth(Employe.JMBG);
 
-                newEmploye.DateOfBirth = DateTime.ParseExact(CalculateBirth(Employe.JMBG), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
 
                
                 CreateManager cm = new CreateManager();
                 cm.tbJMBG.Text = "";
                 //method checks if jmbg already exists in database AND ONLY IF NOT  proceeds to save employe
-                if (KeyCheck(newEmploye.JMBG) == true && PasswordCheck(newEmploye.Pasword)==true)
+                if (KeyCheck(newEmploye.JMBG) == true && PasswordCheck(newEmploye.Pasword)==true && UsernameCheck(newEmploye.Username)==true && NumbersOnly(newEmploye.JMBG)==true)
                 {
+                    newEmploye.DateOfBirth = DateTime.ParseExact(CalculateBirth(Employe.JMBG), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
                     context.tblEmployes.Add(newEmploye);
 
                     context.SaveChanges();
@@ -161,7 +162,7 @@ namespace WpfApp1.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show("JMBG or password already exists");
+                    MessageBox.Show("JMBG or password or username already exists");
                 }
 
 
@@ -284,6 +285,25 @@ namespace WpfApp1.ViewModel
                 return true;
             }
         }
+        private bool UsernameCheck(string user)
+        {
+            List<tblEmploye> list = context.tblEmployes.ToList();
+            List<string> usernames = new List<string>();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                usernames.Add(list[i].Username);
+            }
+
+            if (usernames.Contains(user))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         private List<tblSector> GetSectors()
         {
             List<tblSector> listOfSectors = new List<tblSector>();
@@ -315,6 +335,30 @@ namespace WpfApp1.ViewModel
 
             string complete = year + "-" + month + "-" + day;
             return complete;
+        }
+        private bool NumbersOnly(string input)
+        {
+
+            char[] array = input.ToCharArray();
+
+            int counter = 0;
+            //there must be 13 characaters
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (Char.IsDigit(array[i]))
+                {
+                    counter++;
+                }
+            }
+            //first and thirs number must be correct
+            if (Convert.ToInt32(array[0].ToString()) < 4 && Convert.ToInt32(array[3].ToString()) < 3 && Convert.ToInt32(array[2].ToString()) < 2 && (Convert.ToInt32(array[4].ToString()) == 0 || Convert.ToInt32(array[4].ToString()) == 9))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
     }

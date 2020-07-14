@@ -9,6 +9,45 @@
         Height="450"
         Width="800">
     <Grid>
+        <DataGrid Name="DataGridUsers"
+                  ItemsSource="{Binding ListEmploye, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Employe, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="Black"
+                  BorderBrush="Black"
+                  Foreground="Black"
+                  FontWeight="Bold"
+                  Margin="320,26,32,144">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Surname"
+                                    Binding="{Binding Surname}" />
+                <DataGridTextColumn Header="JMBG"
+                                    Binding="{Binding JMBG}"/>
+                <DataGridTextColumn Header="Account"
+                                    Binding="{Binding Account}" />
+                <DataGridTextColumn Header="E-mail"
+                                    Binding="{Binding Email}" />
+                <DataGridTextColumn  Header="Position"
+                                     Binding="{Binding Position}" />
+                <DataGridTextColumn  Header="Username"
+                                     Binding="{Binding Username}" />
+                <DataGridTextColumn  Header="Password"
+                                     Binding="{Binding Pasword}" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Command="{Binding Path=DataContext.Delete, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                     Content="X" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  TextWrapping="Wrap"

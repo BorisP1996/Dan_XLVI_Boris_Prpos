@@ -22,6 +22,7 @@ namespace Zadatak_1.ViewModel
         {
             modifyMenagerWindow = mmOpen;
             Employe = new tblEmploye();
+            ListEmploye = EmpList();
         }
         #region Properties
         private List<tblEmploye> listEmploye;
@@ -79,18 +80,21 @@ namespace Zadatak_1.ViewModel
                 newEmploye.Email = Employe.Email;
                 string birthdate = cmvm.CalculateBirth(Employe.JMBG);
 
-                newEmploye.DateOfBirth = DateTime.ParseExact(cmvm.CalculateBirth(Employe.JMBG), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
 
-                if (KeyCheck(newEmploye.JMBG) == true && PasswordCheck(newEmploye.Pasword)==true)
+                if (KeyCheck(newEmploye.JMBG) == true && PasswordCheck(newEmploye.Pasword)==true && UsernameCheck(newEmploye.Username)==true && NumbersOnly(newEmploye.JMBG)==true)
                 {
+                    newEmploye.DateOfBirth = DateTime.ParseExact(cmvm.CalculateBirth(Employe.JMBG), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
                     context.tblEmployes.Add(newEmploye);
                     context.SaveChanges();
 
                     MessageBox.Show("Employe is created");
+
+                    ListEmploye = EmpList();
                 }
                 else
                 {
-                    MessageBox.Show("JMBG or password already exist");
+                    MessageBox.Show("JMBG or password or username already exist");
                 }
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
@@ -115,13 +119,74 @@ namespace Zadatak_1.ViewModel
         }
         private bool CanSaveExecute()
         {
-            if (String.IsNullOrEmpty(Employe.FirstName) || String.IsNullOrEmpty(Employe.Surname) || String.IsNullOrEmpty(Employe.JMBG) || Employe.JMBG.Length < 13 || String.IsNullOrEmpty(Employe.Account) || String.IsNullOrEmpty(Employe.Salary.ToString()) || String.IsNullOrEmpty(Employe.Position) || String.IsNullOrEmpty(Employe.Username) || String.IsNullOrEmpty(Employe.Pasword) || String.IsNullOrEmpty(Employe.Email))
+            if (String.IsNullOrEmpty(Employe.FirstName) || String.IsNullOrEmpty(Employe.Surname) || String.IsNullOrEmpty(Employe.JMBG) || String.IsNullOrEmpty(Employe.Account) || Employe.JMBG.Length<13 || String.IsNullOrEmpty(Employe.Salary.ToString()) || String.IsNullOrEmpty(Employe.Position) || String.IsNullOrEmpty(Employe.Username) || String.IsNullOrEmpty(Employe.Pasword) || String.IsNullOrEmpty(Employe.Email))
             {
                 return false;
             }
             else
             {
                 return true;
+            }
+        }
+        private ICommand delete;
+        public ICommand Delete
+        {
+            get
+            {
+                if (delete==null)
+                {
+                    delete = new RelayCommand(param => DeleteExecute(), param => CanDeleteExecute());
+                }
+                return delete;
+            }
+        }
+        private void DeleteExecute()
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    tblEmploye employeToDelete = (from x in context.tblEmployes where x.EmployeID == Employe.EmployeID select x).First();
+
+                    List<int> foreignKeysList = new List<int>();
+                    List<tblManager> managersList = context.tblManagers.ToList();
+
+                    for (int i = 0; i < managersList.Count; i++)
+                    {
+                        foreignKeysList.Add(managersList[i].EmployeID.GetValueOrDefault());
+                    }
+                    MessageBoxResult mbr = MessageBox.Show("Are you sure you want to delete employe?", "Delete confirmation", MessageBoxButton.YesNo);
+
+                    if (mbr == MessageBoxResult.Yes)
+                    {
+                        if (foreignKeysList.Contains(employeToDelete.EmployeID))
+                        {
+                            tblManager managerToDelete = (from x in context.tblManagers where x.EmployeID == Employe.EmployeID select x).First();
+                            context.tblManagers.Remove(managerToDelete);
+                        }
+                        context.tblEmployes.Remove(employeToDelete);
+                        context.SaveChanges();
+                        MessageBox.Show("Employe is deleted");
+                        ListEmploye = EmpList();
+                        Employe = new tblEmploye();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+}
+        private bool CanDeleteExecute()
+        {
+            if (Employe != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         private ICommand close;
@@ -183,6 +248,57 @@ namespace Zadatak_1.ViewModel
             {
                 return true;
             }
+        }
+        private bool UsernameCheck(string user)
+        {
+            List<tblEmploye> list = context.tblEmployes.ToList();
+            List<string> usernames = new List<string>();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                usernames.Add(list[i].Username);
+            }
+
+            if (usernames.Contains(user))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        private bool NumbersOnly(string input)
+        {
+           
+            char[] array = input.ToCharArray();
+
+            int counter = 0;
+            //there must be 13 characaters
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (Char.IsDigit(array[i]))
+                {
+                    counter++;
+                }
+            }
+            //first and thirs number must be correct
+            if (Convert.ToInt32(array[0].ToString()) < 4 && Convert.ToInt32(array[3].ToString()) <3 && Convert.ToInt32(array[2].ToString())<2 &&( Convert.ToInt32(array[4].ToString())==0 || Convert.ToInt32(array[4].ToString()) == 9))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private List<tblEmploye> EmpList()
+        {
+            List<tblEmploye> list = new List<tblEmploye>();
+
+            list = context.tblEmployes.ToList();
+
+            return list;
         }
 
     }
