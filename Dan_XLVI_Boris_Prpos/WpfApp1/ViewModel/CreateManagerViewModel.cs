@@ -19,7 +19,7 @@ namespace WpfApp1.ViewModel
         private readonly BackgroundWorker worker = new BackgroundWorker();
         private readonly object locker = new object();
         CreateManager createManagerWindow;
-        Entity context = new Entity();
+        Entity2 context = new Entity2();
         public CreateManagerViewModel()
         {
 
@@ -138,7 +138,7 @@ namespace WpfApp1.ViewModel
                 //method checks if jmbg already exists in database AND ONLY IF NOT  proceeds to save employe
                 if (KeyCheck(newEmploye.JMBG) == true && PasswordCheck(newEmploye.Pasword)==true && UsernameCheck(newEmploye.Username)==true && NumbersOnly(newEmploye.JMBG)==true)
                 {
-                    newEmploye.DateOfBirth = DateTime.ParseExact(CalculateBirth(Employe.JMBG), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                    newEmploye.DateOfBirth = CalculateBirth(Employe.JMBG);
 
                     context.tblEmployes.Add(newEmploye);
 

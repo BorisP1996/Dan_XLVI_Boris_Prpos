@@ -24,7 +24,7 @@ namespace WpfApp1.Model
         public int EmployeID { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string JMBG { get; set; }
         public string Account { get; set; }
         public string Email { get; set; }
