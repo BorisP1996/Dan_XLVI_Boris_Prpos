@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dbcf17f5e0384011b61adbd056fff8a6" Name="Diagram1">
+      <Diagram DiagramId="95f9f380de5c431aa5092288f7da838d" Name="Diagram1">
         <EntityTypeShape EntityType="Zadatak_43Model.tblEmploye" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Zadatak_43Model.tblLevel" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Zadatak_43Model.tblManager" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Zadatak_43Model.tblReport" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Zadatak_43Model.tblSector" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="Zadatak_43Model.FK__tblManage__Emplo__32AB8735" ManuallyRouted="false" />
-        <AssociationConnector Association="Zadatak_43Model.FK__tblReport__Emplo__3587F3E0" ManuallyRouted="false" />
-        <AssociationConnector Association="Zadatak_43Model.FK__tblManage__Level__3493CFA7" ManuallyRouted="false" />
-        <AssociationConnector Association="Zadatak_43Model.FK__tblManage__Secto__339FAB6E" ManuallyRouted="false" />
+        <AssociationConnector Association="Zadatak_43Model.FK__tblManage__Emplo__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="Zadatak_43Model.FK__tblReport__Emplo__57DD0BE4" ManuallyRouted="false" />
+        <AssociationConnector Association="Zadatak_43Model.FK__tblManage__Level__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="Zadatak_43Model.FK__tblManage__Secto__55F4C372" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

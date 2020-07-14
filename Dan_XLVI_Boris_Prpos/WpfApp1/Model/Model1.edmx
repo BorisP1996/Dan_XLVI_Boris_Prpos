@@ -12,7 +12,7 @@
           <Property Name="EmployeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="DateOfBirth" Type="nvarchar" MaxLength="50" />
           <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="Account" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="40" Nullable="false" />
@@ -57,7 +57,7 @@
           <Property Name="SectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SectorName" Type="nvarchar" MaxLength="15" />
         </EntityType>
-        <Association Name="FK__tblManage__Emplo__32AB8735">
+        <Association Name="FK__tblManage__Emplo__55009F39">
           <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -69,7 +69,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__Level__3493CFA7">
+        <Association Name="FK__tblManage__Level__56E8E7AB">
           <End Role="tblLevels" Type="Self.tblLevels" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -81,7 +81,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__Secto__339FAB6E">
+        <Association Name="FK__tblManage__Secto__55F4C372">
           <End Role="tblSectors" Type="Self.tblSectors" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -93,7 +93,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblReport__Emplo__3587F3E0">
+        <Association Name="FK__tblReport__Emplo__57DD0BE4">
           <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="0..1" />
           <End Role="tblReports" Type="Self.tblReports" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,19 +111,19 @@
           <EntitySet Name="tblManagers" EntityType="Self.tblManagers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblReports" EntityType="Self.tblReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSectors" EntityType="Self.tblSectors" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblManage__Emplo__32AB8735" Association="Self.FK__tblManage__Emplo__32AB8735">
+          <AssociationSet Name="FK__tblManage__Emplo__55009F39" Association="Self.FK__tblManage__Emplo__55009F39">
             <End Role="tblEmployes" EntitySet="tblEmployes" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__Level__3493CFA7" Association="Self.FK__tblManage__Level__3493CFA7">
+          <AssociationSet Name="FK__tblManage__Level__56E8E7AB" Association="Self.FK__tblManage__Level__56E8E7AB">
             <End Role="tblLevels" EntitySet="tblLevels" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__Secto__339FAB6E" Association="Self.FK__tblManage__Secto__339FAB6E">
+          <AssociationSet Name="FK__tblManage__Secto__55F4C372" Association="Self.FK__tblManage__Secto__55F4C372">
             <End Role="tblSectors" EntitySet="tblSectors" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblReport__Emplo__3587F3E0" Association="Self.FK__tblReport__Emplo__3587F3E0">
+          <AssociationSet Name="FK__tblReport__Emplo__57DD0BE4" Association="Self.FK__tblReport__Emplo__57DD0BE4">
             <End Role="tblEmployes" EntitySet="tblEmployes" />
             <End Role="tblReports" EntitySet="tblReports" />
           </AssociationSet>
@@ -140,7 +140,7 @@
           <Property Name="EmployeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="DateOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
@@ -148,8 +148,8 @@
           <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Emplo__32AB8735" FromRole="tblEmployes" ToRole="tblManagers" />
-          <NavigationProperty Name="tblReports" Relationship="Self.FK__tblReport__Emplo__3587F3E0" FromRole="tblEmployes" ToRole="tblReports" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Emplo__55009F39" FromRole="tblEmployes" ToRole="tblManagers" />
+          <NavigationProperty Name="tblReports" Relationship="Self.FK__tblReport__Emplo__57DD0BE4" FromRole="tblEmployes" ToRole="tblReports" />
         </EntityType>
         <EntityType Name="tblLevel">
           <Key>
@@ -157,7 +157,7 @@
           </Key>
           <Property Name="LevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LevelType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Level__3493CFA7" FromRole="tblLevels" ToRole="tblManagers" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Level__56E8E7AB" FromRole="tblLevels" ToRole="tblManagers" />
         </EntityType>
         <EntityType Name="tblManager">
           <Key>
@@ -167,9 +167,9 @@
           <Property Name="EmployeID" Type="Int32" />
           <Property Name="SectorID" Type="Int32" />
           <Property Name="LevelID" Type="Int32" />
-          <NavigationProperty Name="tblEmploye" Relationship="Self.FK__tblManage__Emplo__32AB8735" FromRole="tblManagers" ToRole="tblEmployes" />
-          <NavigationProperty Name="tblLevel" Relationship="Self.FK__tblManage__Level__3493CFA7" FromRole="tblManagers" ToRole="tblLevels" />
-          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblManage__Secto__339FAB6E" FromRole="tblManagers" ToRole="tblSectors" />
+          <NavigationProperty Name="tblEmploye" Relationship="Self.FK__tblManage__Emplo__55009F39" FromRole="tblManagers" ToRole="tblEmployes" />
+          <NavigationProperty Name="tblLevel" Relationship="Self.FK__tblManage__Level__56E8E7AB" FromRole="tblManagers" ToRole="tblLevels" />
+          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblManage__Secto__55F4C372" FromRole="tblManagers" ToRole="tblSectors" />
         </EntityType>
         <EntityType Name="tblReport">
           <Key>
@@ -183,7 +183,7 @@
           <Property Name="Project" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Hourst" Type="Int32" />
-          <NavigationProperty Name="tblEmploye" Relationship="Self.FK__tblReport__Emplo__3587F3E0" FromRole="tblReports" ToRole="tblEmployes" />
+          <NavigationProperty Name="tblEmploye" Relationship="Self.FK__tblReport__Emplo__57DD0BE4" FromRole="tblReports" ToRole="tblEmployes" />
         </EntityType>
         <EntityType Name="tblSector">
           <Key>
@@ -191,9 +191,9 @@
           </Key>
           <Property Name="SectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SectorName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Secto__339FAB6E" FromRole="tblSectors" ToRole="tblManagers" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Secto__55F4C372" FromRole="tblSectors" ToRole="tblManagers" />
         </EntityType>
-        <Association Name="FK__tblManage__Emplo__32AB8735">
+        <Association Name="FK__tblManage__Emplo__55009F39">
           <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -205,7 +205,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblReport__Emplo__3587F3E0">
+        <Association Name="FK__tblReport__Emplo__57DD0BE4">
           <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="0..1" />
           <End Role="tblReports" Type="Self.tblReport" Multiplicity="*" />
           <ReferentialConstraint>
@@ -217,7 +217,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__Level__3493CFA7">
+        <Association Name="FK__tblManage__Level__56E8E7AB">
           <End Role="tblLevels" Type="Self.tblLevel" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -229,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__Secto__339FAB6E">
+        <Association Name="FK__tblManage__Secto__55F4C372">
           <End Role="tblSectors" Type="Self.tblSector" Multiplicity="0..1" />
           <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -241,25 +241,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entity" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entity2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblEmployes" EntityType="Self.tblEmploye" />
           <EntitySet Name="tblLevels" EntityType="Self.tblLevel" />
           <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
           <EntitySet Name="tblReports" EntityType="Self.tblReport" />
           <EntitySet Name="tblSectors" EntityType="Self.tblSector" />
-          <AssociationSet Name="FK__tblManage__Emplo__32AB8735" Association="Self.FK__tblManage__Emplo__32AB8735">
+          <AssociationSet Name="FK__tblManage__Emplo__55009F39" Association="Self.FK__tblManage__Emplo__55009F39">
             <End Role="tblEmployes" EntitySet="tblEmployes" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblReport__Emplo__3587F3E0" Association="Self.FK__tblReport__Emplo__3587F3E0">
+          <AssociationSet Name="FK__tblReport__Emplo__57DD0BE4" Association="Self.FK__tblReport__Emplo__57DD0BE4">
             <End Role="tblEmployes" EntitySet="tblEmployes" />
             <End Role="tblReports" EntitySet="tblReports" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__Level__3493CFA7" Association="Self.FK__tblManage__Level__3493CFA7">
+          <AssociationSet Name="FK__tblManage__Level__56E8E7AB" Association="Self.FK__tblManage__Level__56E8E7AB">
             <End Role="tblLevels" EntitySet="tblLevels" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__Secto__339FAB6E" Association="Self.FK__tblManage__Secto__339FAB6E">
+          <AssociationSet Name="FK__tblManage__Secto__55F4C372" Association="Self.FK__tblManage__Secto__55F4C372">
             <End Role="tblSectors" EntitySet="tblSectors" />
             <End Role="tblManagers" EntitySet="tblManagers" />
           </AssociationSet>
@@ -269,7 +269,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Zadatak_43ModelStoreContainer" CdmEntityContainer="Entity">
+        <EntityContainerMapping StorageEntityContainer="Zadatak_43ModelStoreContainer" CdmEntityContainer="Entity2">
           <EntitySetMapping Name="tblEmployes">
             <EntityTypeMapping TypeName="Zadatak_43Model.tblEmploye">
               <MappingFragment StoreEntitySet="tblEmployes">
