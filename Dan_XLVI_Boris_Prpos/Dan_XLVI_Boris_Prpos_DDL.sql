@@ -24,7 +24,7 @@ create table tblEmployes (
 EmployeID int identity(1,1) primary key,
 FirstName nvarchar (50) not null ,
 Surname nvarchar (50) not null,
-DateOfBirth datetime ,
+DateOfBirth nvarchar(50) ,
 JMBG varchar(13) unique not null, check(LEN(JMBG) = 13 and ISNUMERIC(JMBG) = 1),
 Account nvarchar(20) not null,
 Email nvarchar(40) not null,
