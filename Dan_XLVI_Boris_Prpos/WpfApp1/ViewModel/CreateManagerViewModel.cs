@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -13,7 +16,8 @@ namespace WpfApp1.ViewModel
 {
     class CreateManagerViewModel : ViewModelBase
     {
-
+        private readonly BackgroundWorker worker = new BackgroundWorker();
+        private readonly object locker = new object();
         CreateManager createManagerWindow;
         Entity context = new Entity();
         public CreateManagerViewModel()
@@ -28,6 +32,8 @@ namespace WpfApp1.ViewModel
             Employe = new tblEmploye();
             Sector = new tblSector();
             Level = new tblLevel();
+            worker.DoWork += WorkerOnDoWork;
+
         }
         #region Properties
         private tblEmploye employe;
@@ -148,7 +154,10 @@ namespace WpfApp1.ViewModel
 
                     context.SaveChanges();
                     MessageBox.Show("Manager is created.");
-
+                    if (!worker.IsBusy)
+                    {
+                        worker.RunWorkerAsync();
+                    }
                 }
                 else
                 {
@@ -207,6 +216,32 @@ namespace WpfApp1.ViewModel
         private bool CanCloseExecute()
         {
             return true;
+        }
+
+        public void WorkerOnDoWork(object sender, DoWorkEventArgs e)
+        {
+
+            WriteToFile(Employe.FirstName, Employe.Surname);
+        }
+
+        public void WriteToFile(string name, string surname)
+        {
+            string path = @"../../Log.txt";
+            lock (locker)
+            {
+                try
+                {
+                    Thread.Sleep(2500);
+                    StreamWriter sw = new StreamWriter(path, true);
+                    string timeLog = "[" + DateTime.Now.ToString("dd.MM.yyyy H:mm:ss") + "] ";
+                    sw.WriteLine(timeLog + "Manager is created. Name:{0}, Surname:{1}", name, surname);
+                    sw.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
         #region Methods
         private bool KeyCheck(string jmbg)

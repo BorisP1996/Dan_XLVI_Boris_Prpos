@@ -1,0 +1,5 @@
+[14.07.2020 16:02:04] Manager is created. Name:Milos, Surname:Kos
+[14.07.2020 16:02:11] Manager is created. Name:Milos, Surname:Kos
+[14.07.2020 16:02:16] Manager is created. Name:Milos, Surname:Kos
+[14.07.2020 16:02:22] Manager is created. Name:Milos, Surname:Kos
+[14.07.2020 16:02:27] Manager is created. Name:Milos, Surname:Kos
