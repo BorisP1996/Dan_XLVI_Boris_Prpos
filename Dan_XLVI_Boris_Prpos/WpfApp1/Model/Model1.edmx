@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Zadatak_43Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblEmployes">
+          <Key>
+            <PropertyRef Name="EmployeID" />
+          </Key>
+          <Property Name="EmployeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Account" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLevels">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelType" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="tblManagers">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ManagerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeID" Type="int" />
+          <Property Name="SectorID" Type="int" />
+          <Property Name="LevelID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblReports">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeID" Type="int" />
+          <Property Name="EmployeName" Type="nvarchar" MaxLength="30" />
+          <Property Name="EmployeSurname" Type="nvarchar" MaxLength="30" />
+          <Property Name="ReportDate" Type="datetime" />
+          <Property Name="Project" Type="nvarchar" MaxLength="30" />
+          <Property Name="Position" Type="nvarchar" MaxLength="30" />
+          <Property Name="Hourst" Type="int" />
+        </EntityType>
+        <EntityType Name="tblSectors">
+          <Key>
+            <PropertyRef Name="SectorID" />
+          </Key>
+          <Property Name="SectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <Association Name="FK__tblManage__Emplo__32AB8735">
+          <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="0..1" />
+          <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployes">
+              <PropertyRef Name="EmployeID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__Level__3493CFA7">
+          <End Role="tblLevels" Type="Self.tblLevels" Multiplicity="0..1" />
+          <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLevels">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__Secto__339FAB6E">
+          <End Role="tblSectors" Type="Self.tblSectors" Multiplicity="0..1" />
+          <End Role="tblManagers" Type="Self.tblManagers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSectors">
+              <PropertyRef Name="SectorID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReport__Emplo__3587F3E0">
+          <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="0..1" />
+          <End Role="tblReports" Type="Self.tblReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployes">
+              <PropertyRef Name="EmployeID" />
+            </Principal>
+            <Dependent Role="tblReports">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Zadatak_43ModelStoreContainer">
+          <EntitySet Name="tblEmployes" EntityType="Self.tblEmployes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLevels" EntityType="Self.tblLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManagers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReports" EntityType="Self.tblReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSectors" EntityType="Self.tblSectors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblManage__Emplo__32AB8735" Association="Self.FK__tblManage__Emplo__32AB8735">
+            <End Role="tblEmployes" EntitySet="tblEmployes" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__Level__3493CFA7" Association="Self.FK__tblManage__Level__3493CFA7">
+            <End Role="tblLevels" EntitySet="tblLevels" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__Secto__339FAB6E" Association="Self.FK__tblManage__Secto__339FAB6E">
+            <End Role="tblSectors" EntitySet="tblSectors" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReport__Emplo__3587F3E0" Association="Self.FK__tblReport__Emplo__3587F3E0">
+            <End Role="tblEmployes" EntitySet="tblEmployes" />
+            <End Role="tblReports" EntitySet="tblReports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Zadatak_43Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblEmploye">
+          <Key>
+            <PropertyRef Name="EmployeID" />
+          </Key>
+          <Property Name="EmployeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Emplo__32AB8735" FromRole="tblEmployes" ToRole="tblManagers" />
+          <NavigationProperty Name="tblReports" Relationship="Self.FK__tblReport__Emplo__3587F3E0" FromRole="tblEmployes" ToRole="tblReports" />
+        </EntityType>
+        <EntityType Name="tblLevel">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelType" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Level__3493CFA7" FromRole="tblLevels" ToRole="tblManagers" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ManagerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeID" Type="Int32" />
+          <Property Name="SectorID" Type="Int32" />
+          <Property Name="LevelID" Type="Int32" />
+          <NavigationProperty Name="tblEmploye" Relationship="Self.FK__tblManage__Emplo__32AB8735" FromRole="tblManagers" ToRole="tblEmployes" />
+          <NavigationProperty Name="tblLevel" Relationship="Self.FK__tblManage__Level__3493CFA7" FromRole="tblManagers" ToRole="tblLevels" />
+          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblManage__Secto__339FAB6E" FromRole="tblManagers" ToRole="tblSectors" />
+        </EntityType>
+        <EntityType Name="tblReport">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeID" Type="Int32" />
+          <Property Name="EmployeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeSurname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ReportDate" Type="DateTime" Precision="3" />
+          <Property Name="Project" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Hourst" Type="Int32" />
+          <NavigationProperty Name="tblEmploye" Relationship="Self.FK__tblReport__Emplo__3587F3E0" FromRole="tblReports" ToRole="tblEmployes" />
+        </EntityType>
+        <EntityType Name="tblSector">
+          <Key>
+            <PropertyRef Name="SectorID" />
+          </Key>
+          <Property Name="SectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectorName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK__tblManage__Secto__339FAB6E" FromRole="tblSectors" ToRole="tblManagers" />
+        </EntityType>
+        <Association Name="FK__tblManage__Emplo__32AB8735">
+          <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="0..1" />
+          <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployes">
+              <PropertyRef Name="EmployeID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblReport__Emplo__3587F3E0">
+          <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="0..1" />
+          <End Role="tblReports" Type="Self.tblReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployes">
+              <PropertyRef Name="EmployeID" />
+            </Principal>
+            <Dependent Role="tblReports">
+              <PropertyRef Name="EmployeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__Level__3493CFA7">
+          <End Role="tblLevels" Type="Self.tblLevel" Multiplicity="0..1" />
+          <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLevels">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblManage__Secto__339FAB6E">
+          <End Role="tblSectors" Type="Self.tblSector" Multiplicity="0..1" />
+          <End Role="tblManagers" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSectors">
+              <PropertyRef Name="SectorID" />
+            </Principal>
+            <Dependent Role="tblManagers">
+              <PropertyRef Name="SectorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblEmployes" EntityType="Self.tblEmploye" />
+          <EntitySet Name="tblLevels" EntityType="Self.tblLevel" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblReports" EntityType="Self.tblReport" />
+          <EntitySet Name="tblSectors" EntityType="Self.tblSector" />
+          <AssociationSet Name="FK__tblManage__Emplo__32AB8735" Association="Self.FK__tblManage__Emplo__32AB8735">
+            <End Role="tblEmployes" EntitySet="tblEmployes" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblReport__Emplo__3587F3E0" Association="Self.FK__tblReport__Emplo__3587F3E0">
+            <End Role="tblEmployes" EntitySet="tblEmployes" />
+            <End Role="tblReports" EntitySet="tblReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__Level__3493CFA7" Association="Self.FK__tblManage__Level__3493CFA7">
+            <End Role="tblLevels" EntitySet="tblLevels" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblManage__Secto__339FAB6E" Association="Self.FK__tblManage__Secto__339FAB6E">
+            <End Role="tblSectors" EntitySet="tblSectors" />
+            <End Role="tblManagers" EntitySet="tblManagers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Zadatak_43ModelStoreContainer" CdmEntityContainer="Entity">
+          <EntitySetMapping Name="tblEmployes">
+            <EntityTypeMapping TypeName="Zadatak_43Model.tblEmploye">
+              <MappingFragment StoreEntitySet="tblEmployes">
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLevels">
+            <EntityTypeMapping TypeName="Zadatak_43Model.tblLevel">
+              <MappingFragment StoreEntitySet="tblLevels">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="LevelType" ColumnName="LevelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblManagers">
+            <EntityTypeMapping TypeName="Zadatak_43Model.tblManager">
+              <MappingFragment StoreEntitySet="tblManagers">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblReports">
+            <EntityTypeMapping TypeName="Zadatak_43Model.tblReport">
+              <MappingFragment StoreEntitySet="tblReports">
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="EmployeID" ColumnName="EmployeID" />
+                <ScalarProperty Name="EmployeName" ColumnName="EmployeName" />
+                <ScalarProperty Name="EmployeSurname" ColumnName="EmployeSurname" />
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Hourst" ColumnName="Hourst" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSectors">
+            <EntityTypeMapping TypeName="Zadatak_43Model.tblSector">
+              <MappingFragment StoreEntitySet="tblSectors">
+                <ScalarProperty Name="SectorID" ColumnName="SectorID" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
